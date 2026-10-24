@@ -1,5 +1,5 @@
 window.BOOKS=window.BOOKS||[];
-window.BOOKS.push({id:'english',title:'English Made Simple',icon:'📝',color:'#be123c',blurb:'Parts of speech, concord, and essay writing.',
+window.BOOKS.push({id:'english',title:'English Made Simple',icon:'📝',color:'#be123c',blurb:'The full SS1–SS3 WAEC/NECO/JAMB syllabus in short, plain notes with worked examples and answered exercises.',
 further:['Countdown to WASSCE/SSCE, NECO, UTME English Language','Senior Secondary English (your school\'s approved text)'],
 chapters:[
 {title:'Parts of speech',topic:'Grammar: word classes (lexis and structure)',html:`

@@ -1,5 +1,5 @@
 window.BOOKS=window.BOOKS||[];
-window.BOOKS.push({id:'economics',title:'Economics Made Simple',icon:'📈',color:'#0f766e',blurb:'Basic ideas, demand and supply, and money.',
+window.BOOKS.push({id:'economics',title:'Economics Made Simple',icon:'📈',color:'#0f766e',blurb:'The full SS1–SS3 WAEC/NECO/JAMB syllabus in short, plain notes with worked examples and answered exercises.',
 further:['Comprehensive Economics for Senior Secondary Schools','Senior Secondary Economics (your school\'s approved text)'],
 chapters:[
 {title:'Basic economic ideas',topic:'Basic concepts: wants, scarcity, choice, scale of preference, opportunity cost',html:`
