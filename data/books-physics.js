@@ -1,5 +1,5 @@
 window.BOOKS=window.BOOKS||[];
-window.BOOKS.push({id:'physics',title:'Physics Made Simple',icon:'⚡',color:'#2f6fd6',blurb:'Motion, forces and electricity in plain words.',
+window.BOOKS.push({id:'physics',title:'Physics Made Simple',icon:'⚡',color:'#2f6fd6',blurb:'The full SS1–SS3 WAEC/NECO/JAMB syllabus in short, plain notes with worked examples and answered exercises.',
 further:['New School Physics for Senior Secondary Schools','Senior Secondary Physics (your school\'s approved text)'],
 chapters:[
 {title:'Motion in a straight line',topic:'Motion: speed, velocity, acceleration, equations of motion',html:`

@@ -1,5 +1,5 @@
 window.BOOKS=window.BOOKS||[];
-window.BOOKS.push({id:'maths',title:'Mathematics Made Simple',icon:'➗',color:'#7c3aed',blurb:'Indices and logs, quadratics, and trigonometry.',
+window.BOOKS.push({id:'maths',title:'Mathematics Made Simple',icon:'➗',color:'#7c3aed',blurb:'The full SS1–SS3 WAEC/NECO/JAMB syllabus in short, plain notes with worked examples and answered exercises.',
 further:['New General Mathematics for Senior Secondary Schools','Senior Secondary Mathematics (your school\'s approved text)'],
 chapters:[
 {title:'Indices and logarithms',topic:'Number and numeration: indices, logarithms, standard form',html:`

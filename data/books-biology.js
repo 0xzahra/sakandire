@@ -1,5 +1,5 @@
 window.BOOKS=window.BOOKS||[];
-window.BOOKS.push({id:'biology',title:'Biology Made Simple',icon:'🌿',color:'#15803d',blurb:'Cells, movement of substances and nutrition.',
+window.BOOKS.push({id:'biology',title:'Biology Made Simple',icon:'🌿',color:'#15803d',blurb:'The full SS1–SS3 WAEC/NECO/JAMB syllabus in short, plain notes with worked examples and answered exercises.',
 further:['Modern Biology for Senior Secondary Schools','Senior Secondary Biology (your school\'s approved text)'],
 chapters:[
 {title:'The cell',topic:'Cell structure and functions; plant and animal cells',html:`

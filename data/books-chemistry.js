@@ -1,5 +1,5 @@
 window.BOOKS=window.BOOKS||[];
-window.BOOKS.push({id:'chemistry',title:'Chemistry Made Simple',icon:'⚗️',color:'#c2410c',blurb:'Atoms, moles and acids without the headache.',
+window.BOOKS.push({id:'chemistry',title:'Chemistry Made Simple',icon:'⚗️',color:'#c2410c',blurb:'The full SS1–SS3 WAEC/NECO/JAMB syllabus in short, plain notes with worked examples and answered exercises.',
 further:['New School Chemistry for Senior Secondary Schools','Senior Secondary Chemistry (your school\'s approved text)'],
 chapters:[
 {title:'Atoms and the periodic table',topic:'Atomic structure, electronic configuration, periodic table',html:`
