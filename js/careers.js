@@ -13,16 +13,42 @@ function fits(u,chosen){ // chosen = 3 non-English subject keys
   return tryG(0,rest)}
 function card(c){return `<details class="card" style="margin:8px 0"><summary>${esc(c.name)} <span class="tag">${esc(c.fac)}</span></summary>
  <p>${esc(c.desc)}</p><p><b>UTME subjects:</b> ${utmeText(c.utme)}</p><p><b>O'Level:</b> ${esc(c.olevel)}</p><p><b>Duration:</b> ${esc(c.years)}</p><p><b>Careers:</b> ${esc(c.careers)}</p>
- ${c.tech?`<details><summary>💻 Tech careers this degree can lead to</summary><ul>${K.TECH.map(([n,d])=>`<li><b>${esc(n)}</b> — ${esc(d)}</li>`).join('')}</ul><p class="muted" style="font-size:.8rem">${esc(K.SRC)}</p></details>`:''}</details>`}
+ ${curr(c.name)}${c.tech?`<details><summary>💻 Tech careers this degree can lead to</summary><ul>${K.TECH.map(([n,d])=>`<li><b>${esc(n)}</b> — ${esc(d)}</li>`).join('')}</ul><p class="muted" style="font-size:.8rem">${esc(K.SRC)}</p></details>`:''}</details>`}
+function curr(n){const R=window.CURRICULA&&window.CURRICULA[n];if(!R)return'';
+ return `<details><summary>📅 Year-by-year courses (typical; varies by school)</summary>${R.map((y,i)=>{const[a,b]=y.split(' | ');return `<div class="yr"><h4>Year ${i+1} (${(i+1)*100} level)</h4>${b!==undefined?`<p><b>1st semester:</b> ${esc(a)}</p><p><b>2nd semester:</b> ${esc(b)}</p>`:`<p>${esc(a)}</p>`}</div>`}).join('')}<p class="muted small">${esc(window.CURR_NOTE)}</p></details>`}
+const FAC=[
+['Life Sciences (or Biological Sciences)','Biology; Applied Biology; Microbiology; Biochemistry; Plant Biology/Botany; Zoology; Genetics and Biotechnology','BSc Biology, BSc Microbiology, BSc Biochemistry…'],
+['Physical Sciences','Physics; Chemistry; Industrial Chemistry; Mathematics; Statistics; Geology; Geophysics','BSc Physics, BSc Industrial Chemistry, BSc Statistics…'],
+['Computing (newer schools) or inside Physical Sciences','Computer Science; Software Engineering; Information Technology; Cyber Security; Information Systems; Data Science','BSc Computer Science, BSc Cyber Security…'],
+['Basic Medical Sciences (in a College of Health/Medical Sciences)','Anatomy; Physiology; Medical Biochemistry; Pharmacology (some schools)','BSc Anatomy, BSc Physiology; also the pre-clinical years of MBBS'],
+['Clinical Sciences','Internal Medicine; Surgery; Paediatrics; Obstetrics & Gynaecology; Community Medicine; Psychiatry; Radiology; Anaesthesia; Ophthalmology','MBBS (taught across these departments in the clinical years)'],
+['Dentistry','Restorative Dentistry; Oral Surgery; Child Dental Health; Preventive Dentistry','BDS'],
+['Pharmaceutical Sciences','Pharmaceutics; Pharmaceutical Chemistry; Pharmacognosy; Pharmacology; Clinical Pharmacy; Pharmaceutical Microbiology','PharmD'],
+['Allied Health / Health Sciences','Nursing Science; Medical Laboratory Science; Medical Radiography; Physiotherapy; Optometry; Nutrition and Dietetics; Public/Environmental Health; Health Information Management','BNSc, BMLS, BSc Radiography, DPT, OD…'],
+['Engineering','Civil; Mechanical; Electrical/Electronic; Chemical; Petroleum; Computer; Mechatronics; Agricultural; Aerospace; Metallurgical and Materials','BEng (B.Eng.) in each'],
+['Environmental Sciences (or Environmental Design)','Architecture; Building; Quantity Surveying; Estate Management; Urban and Regional Planning; Surveying and Geoinformatics; Fine/Industrial Design (some schools)','BSc Architecture (+MSc), BSc Building…'],
+['Agriculture','Animal Science; Crop Science; Soil Science; Agricultural Economics; Agricultural Extension; Fisheries; Forestry; Food Science (some schools)','BAgric or BSc in each'],
+['Veterinary Medicine','Veterinary Anatomy; Physiology; Pathology; Medicine; Surgery; Public Health','DVM'],
+['Arts (or Humanities)','English and Literary Studies; History and International Studies; Linguistics; French; Philosophy; Religious Studies; Theatre Arts; Music; Nigerian languages','BA in each'],
+['Social Sciences','Economics; Political Science; Sociology; Psychology; Geography; Mass Communication (some schools); Criminology; Social Work; Peace and Conflict','BSc in each'],
+['Management Sciences (or Administration)','Accounting; Banking and Finance; Business Administration; Marketing; Insurance; Actuarial Science; Public Administration; Taxation','BSc in each'],
+['Law','Private and Property Law; Public Law; Commercial and Industrial Law; International Law; Islamic Law (some schools)','LLB (5 years), then Nigerian Law School'],
+['Education','Science Education; Arts and Social Science Education; Educational Management; Guidance and Counselling; Library Science; Human Kinetics','BSc(Ed), BA(Ed), BEd']];
+function faculties(app,tabs){app.innerHTML=`<h1>How universities are organised</h1>${tabs}
+ <div class="emph"><b>University → Faculty (or College/School) → Department → Degree programme.</b><br>A <b>faculty</b> is a big family of related subjects with a Dean. A <b>department</b> is one subject area with a Head of Department (HOD); it runs one or more <b>degree programmes</b>. Example: University of Lagos → Faculty of Science → Department of Microbiology → BSc Microbiology. Big health schools group faculties into a <b>College</b> (e.g. College of Medicine → Faculties of Basic Medical Sciences and Clinical Sciences → MBBS).</div>
+ <svg viewBox="0 0 340 120" role="img" aria-label="University to faculty to department to degree"><g font-size="11" text-anchor="middle">${['University','Faculty','Department','Degree'].map((t,i)=>`<rect x="${8+i*83}" y="40" width="74" height="36" rx="8" fill="${['#1f6f4a','#2f8f5f','#e07b24','#2f6fd6'][i]}"/><text x="${45+i*83}" y="62" fill="#fff">${t}</text>${i<3?`<path d="M${82+i*83} 58h8" stroke="#888" stroke-width="2"/>`:''}`).join('')}</g><text x="170" y="100" font-size="10" text-anchor="middle" fill="#888">e.g. UNILAG → Science → Microbiology → BSc Microbiology</text></svg>
+ ${FAC.map(([f,d,g])=>`<details class="card" style="margin:6px 0"><summary><b>Faculty of ${esc(f)}</b></summary><p><b>Departments:</b> ${d.split('; ').map(x=>`<span class="chip">${esc(x)}</span>`).join(' ')}</p><p><b>Degrees:</b> ${esc(g)}</p></details>`).join('')}
+ <p class="note">Structure <b>varies by university</b>: a course in the Faculty of Science at one school may sit in Life Sciences, Agriculture or Computing at another (e.g. Mass Communication may be in Arts, Social Sciences or its own faculty). Check the school's website or brochure.</p>${WARN}`}
 const C={};
 C.route=function(app,sub){
-  const tabs=`<div class="row" style="margin:8px 0"><a class="btn sm ${!sub?'pri':''}" href="#/careers">Courses</a><a class="btn sm ${sub==='finder'?'pri':''}" href="#/careers/finder">Career finder</a><a class="btn sm ${sub==='check'?'pri':''}" href="#/careers/check">Check my combination</a><a class="btn sm ${sub==='path'?'pri':''}" href="#/careers/path">Degree path</a><a class="btn sm ${sub==='routes'?'pri':''}" href="#/careers/routes">Diplomas & other routes</a><a class="btn sm ${sub==='dir'?'pri':''}" href="#/careers/dir">Institutions</a></div>`;
-  if(sub==='finder')return finder(app,tabs);if(sub==='check')return check(app,tabs);if(sub==='path')return path(app,tabs);if(sub==='routes')return routes(app,tabs);if(sub==='dir')return dir(app,tabs);
+  const T=[['','Courses'],['check','Check my combination'],['finder','Career finder'],['faculties','Faculties'],['path','Degree length'],['pg','Graduate study'],['routes','Diplomas & other routes'],['dir','Schools directory']];
+  const tabs=`<div class="row" style="margin:8px 0">${T.map(([k,t])=>`<a class="btn sm ${(sub||'')===k?'pri':''}" href="#/careers${k?'/'+k:''}">${t}</a>`).join('')}</div>`;
+  if(sub==='finder')return finder(app,tabs);if(sub==='check')return check(app,tabs);if(sub==='path'||sub==='pg')return path(app,tabs,sub);if(sub==='faculties')return faculties(app,tabs);if(sub==='routes')return routes(app,tabs);if(sub==='dir')return dir(app,tabs);
   app.innerHTML=`<h1>🎓 Courses & Careers</h1><p>Many students pick the wrong JAMB subjects and drift away from the career they wanted. Start here.</p>${tabs}${WARN}
-  <input id="cq" type="search" placeholder="Search a course or career, e.g. nurse, law, data" style="width:100%"><p class="muted" id="cn"></p><div id="cl"></div>`;
+  <input id="cq" type="search" placeholder="Search a course or career, e.g. nurse, law, data" style="width:100%"><select id="cf" style="margin-top:6px;width:100%"><option value="">All faculties</option>${[...new Set(K.COURSES.map(c=>c.fac.split(' / ')[0]))].sort().map(f=>`<option>${esc(f)}</option>`).join('')}</select><p class="muted" id="cn"></p><div id="cl"></div>`;
   const q=app.querySelector('#cq'),l=app.querySelector('#cl'),n=app.querySelector('#cn');
-  const run=()=>{const t=q.value.toLowerCase();const r=K.COURSES.filter(c=>(c.name+c.fac+c.careers+c.desc+(c.tech?K.TECH.map(x=>x[0]).join(' '):'')).toLowerCase().includes(t));n.textContent=r.length+' courses';l.innerHTML=r.map(card).join('')};
-  q.oninput=run;run();
+  const fs=app.querySelector('#cf');const run=()=>{const t=q.value.toLowerCase(),fv=fs.value;const r=K.COURSES.filter(c=>(!fv||c.fac.startsWith(fv))&&(c.name+c.fac+c.careers+c.desc+(c.tech?K.TECH.map(x=>x[0]).join(' '):'')).toLowerCase().includes(t));n.textContent=r.length+' courses';l.innerHTML=r.map(card).join('')};
+  q.oninput=run;fs.onchange=run;run();
 };
 function finder(app,tabs){
   const Q=[['health','I want to care for sick people or keep people healthy'],['science','I enjoy Biology, Chemistry or Physics experiments'],['numbers','I like Maths and solving number puzzles'],['tech','I like computers, phones and building apps'],['build','I like designing or fixing machines, buildings or gadgets'],['money','I am interested in money, business or trading'],['people','I like working with and helping people'],['words','I love reading, writing, debating or speaking'],['law','I care about justice, rules and how government works'],['nature','I like farming, animals, plants or the environment'],['art','I love drawing, design, music, drama or film']];
@@ -41,7 +67,7 @@ function check(app,tabs){
     const ok=K.COURSES.filter(c=>fits(c.utme,ch));
     app.querySelector('#cr').innerHTML=`<h2>${ok.length} course(s) usually accept English + ${ch.map(SUBNAME).join(', ')}</h2>${ok.length?ok.map(card).join(''):'<p>No course in our list matches this exact combination. Look at the courses you want and adjust your subjects.</p>'}`};
 }
-function path(app,tabs){
+function path(app,tabs,sub){
   app.innerHTML=`<h1>The Nigerian degree path</h1>${tabs}
   <div class="card"><h2>1. Getting in</h2><ul><li><b>UTME (JAMB)</b>: 4 subjects including Use of English, scored out of 400. Then the school's <b>Post-UTME</b> screening (a test or credential screening).</li><li><b>O'Level</b>: usually five credits (WAEC/NECO/NABTEB) including English and Mathematics, at not more than two sittings. Medicine and some courses prefer one sitting.</li><li><b>Direct Entry (DE)</b>: with A-Level, IJMB, JUPEB, OND, NCE or HND you can apply through JAMB DE and usually start at <b>200 level</b> (one year shorter).</li></ul></div>
   <div class="card"><h2>2. How long is the degree?</h2><table class="ft" style="font-size:.9rem"><tr><th style="text-align:left">Programme</th><th style="text-align:left">Typical length</th></tr>
@@ -60,6 +86,9 @@ function path(app,tabs){
   <li><b>MPhil</b> — about 2 years of research. Often a bridge: an MPhil/PhD route for those whose Master's grade was not high enough for direct PhD.</li>
   <li><b>PhD</b> — usually at least 3 years of original research after a Master's (many schools ask for a Master's average around 60% / 4.0 on a 5-point CGPA). Needed for university lecturing and senior research.</li></ul>
   <p class="muted" style="font-size:.85rem">Durations and entry grades differ between universities. Check the school's postgraduate prospectus.</p></div>${WARN}`;
+  const h=app.innerHTML,k=h.indexOf('<div class="card"><h2>3.');
+  if(sub==='pg'&&k>0)app.innerHTML=h.slice(0,h.indexOf('</h1>')).replace('The Nigerian degree path','Graduate study: PGD, Master\'s, MPhil, PhD')+'</h1>'+tabs+h.slice(k).replace('3. After the first degree: postgraduate options','After the first degree');
+  else if(k>0)app.innerHTML=h.slice(0,k)+'<p><a class="btn" href="#/careers/pg">Next: graduate study (PGD, Master\'s, PhD) →</a></p>'+WARN;
 }
 function routes(app,tabs){
   app.innerHTML=`<h1>Diplomas & other routes</h1>${tabs}<p>University is not the only road. These routes lead to good careers and many can take you to a degree later.</p>

@@ -2,11 +2,11 @@
 (function(){
 const R={};const esc=s=>window.esc(s);
 R.route=function(app,w){
-  if(w==='periodic')return periodic(app);if(w==='tables')return tables(app);if(w==='maps')return maps(app);
+  if(w==='periodic')return periodic(app);if(w==='tables')return tables(app);if(w==='maps')return maps(app);if(w&&w.startsWith('world'))return window.World.route(app,decodeURIComponent(w.slice(6)));
   app.innerHTML=`<h1>Reference</h1>
   <a class="card" style="margin:8px 0" href="#/ref/periodic"><h3>⚛️ Periodic table (IUPAC, 118 elements)</h3><p>Tap any element for details.</p></a>
   <a class="card" style="margin:8px 0" href="#/ref/tables"><h3>🔢 Four-figure tables</h3><p>Logarithms, antilogarithms, sine/cosine/tangent, square roots — with how-to guides.</p></a>
-  <a class="card" style="margin:8px 0" href="#/ref/maps"><h3>🗺️ Maps</h3><p>Nigeria (36 states + FCT), West Africa, Africa.</p></a>`;
+  <a class="card" style="margin:8px 0" href="#/ref/maps"><h3>🗺️ Nigeria & West Africa maps</h3><p>Nigeria (36 states + FCT), West Africa, Africa.</p></a><a class="card" style="margin:8px 0" href="#/ref/world"><h3>🌍 World atlas</h3><p>Every continent and country, with states/provinces (loads on demand).</p></a>`;
 };
 /* ---- periodic ---- */
 const CAT={am:['Alkali metal','#ffb3a7'],ae:['Alkaline earth metal','#ffd8a0'],tm:['Transition metal','#f6e39a'],pt:['Post-transition metal','#c8e6a0'],md:['Metalloid','#a8e0c8'],nm:['Reactive non-metal','#a9d4ff'],hg:['Halogen','#c6b8ff'],ng:['Noble gas','#f0b8e8'],ln:['Lanthanide','#ffc9d9'],ac:['Actinide','#e8c0a8'],uk:['Properties not yet known (synthetic)','#ddd']};
